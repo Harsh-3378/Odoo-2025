@@ -21,3 +21,8 @@ export const updateProduct = async (id, data) => {
 export const deleteProduct = async (id) => {
   return await axiosClient.delete(`${API_URLS.product.delete}/${id}`);
 };
+
+export const getProductsByCategory = async (category) => {
+  const res = await axiosClient.get(`${API_URLS.product.getByCategory}/${category}`);
+  return res.data.products || [];
+};

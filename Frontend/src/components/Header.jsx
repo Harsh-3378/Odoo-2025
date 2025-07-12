@@ -6,6 +6,7 @@ import { NavMain } from "./sidebar/navMain";
 
 export default function Header() {
   const currentUser = useSelector(selectCurrentUser);
+  console.log("Header currentUser", currentUser);
   return (
     <header className="bg-background/30 backdrop-blur-2xl flex items-center justify-between py-3 px-4">
       <img src="/logo.png" alt="Logo" className="h-7" />
