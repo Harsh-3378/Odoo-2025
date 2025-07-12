@@ -7,13 +7,16 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import AddProduct from "./pages/Product/AddProduct";
 import EditProduct from "./pages/Product/EditProduct";
 import Product from "./pages/Product/Product";
-import SignupPage from "./pages/SigninPage/SignupPage";
 import ProductDetail from "./pages/Product/ProductDetail";
+import ProfileSetup from "./pages/Profile/ProfileSetup";
+import SignupPage from "./pages/SigninPage/SignupPage";
 
 function App() {
   return (
     <div className="App">
       <Routes>
+        {/* Profile setup route outside Layout */}
+        <Route path="/profile-setup" element={<ProfileSetup />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="login" element={<LoginPage />} />

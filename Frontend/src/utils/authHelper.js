@@ -16,10 +16,16 @@ export const setupUser = (response, dispatch, navigate) => {
           data: userData,
           auth_token: authToken,
           email: userData.email,
+          profilePending: userData.profilePending ?? true, // default true if missing
         },
       }),
     );
-    navigate("/", { replace: true });
+    // Redirect based on profilePending
+    if (userData.profilePending ?? true) {
+      navigate("/profile-setup", { replace: true });
+    } else {
+      navigate("/", { replace: true });
+    }
   } else {
     // Clear any existing token if login fails
     localStorage.removeItem("token");

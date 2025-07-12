@@ -22,11 +22,7 @@ export function ImageUploadComponent({ onUploaded }) {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto p-6 space-y-6">
-      <div className="text-center space-y-2">
-        <h1 className="text-2xl font-bold">Image Upload</h1>
-        <p className="text-muted-foreground">Upload PNG, JPG, or WEBP images to Cloudinary</p>
-      </div>
+    <div className="w-full max-w-2xl mx-auto">
 
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
@@ -34,10 +30,9 @@ export function ImageUploadComponent({ onUploaded }) {
         </div>
       )}
 
-      <Card>
+      <Card className="bg-background/30">
         <CardHeader>
           <CardTitle>Upload Images</CardTitle>
-          <CardDescription>Select PNG, JPG, or WEBP files to upload</CardDescription>
         </CardHeader>
         <CardContent>
           <div>

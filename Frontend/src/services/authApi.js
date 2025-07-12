@@ -12,3 +12,7 @@ export const getUserData = async () => {
 export const signupUser = async (data) => {
   return await axiosClient.post(API_URLS.auth.register, data);
 };
+
+export const updateUserProfile = async (data) => {
+  return await axiosClient.put("/user/profile", data);
+};

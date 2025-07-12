@@ -1,8 +1,8 @@
 import FullPageLoader from "@/components/FullPageLoader";
-import { loginUser } from "@/state/authSlice";
+import { loginUser, selectProfilePending } from "@/state/authSlice";
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getUserData } from "./authApi";
 
@@ -14,6 +14,7 @@ const AuthProvider = ({ children }) => {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
   const hasCheckedAuth = useRef(false);
+  const profilePending = useSelector(selectProfilePending);
 
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -57,11 +58,15 @@ const AuthProvider = ({ children }) => {
               data: user,
               auth_token: token,
               email: user.email || "",
+              profilePending: user.profilePending ?? true,
             },
           }),
         );
 
-        if (isPublic) {
+        // Redirect based on profilePending
+        if (user.profilePending ?? true) {
+          navigate("/profile-setup", { replace: true });
+        } else if (isPublic) {
           console.log("[Auth] Redirecting to /home since user is already logged in.");
           toast.success("Already logged in, redirecting...");
           navigate("/home", { replace: true });
@@ -89,6 +94,12 @@ const AuthProvider = ({ children }) => {
 
     checkAuthentication();
   }, [dispatch, location.pathname, navigate]);
+
+  // Redirect to profile setup if profile is pending and not already on that page
+  // if (!loading && profilePending && location.pathname !== "/profile-setup") {
+  //   navigate("/profile-setup", { replace: true });
+  //   return null;
+  // }
 
   if (loading) return <FullPageLoader />;
   return children;

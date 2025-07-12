@@ -1,66 +1,53 @@
-import { ChevronRight } from 'lucide-react';
-
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { ChevronRight } from "lucide-react";
 import {
-    SidebarGroup,
-    SidebarGroupLabel,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
-    SidebarMenuSub,
-    SidebarMenuSubButton,
-    SidebarMenuSubItem,
-} from '@/components/ui/sidebar';
-import { Link } from 'react-router-dom';
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
+} from "@/components/ui/dropdown-menu";
+import { Link } from "react-router-dom";
 
-export function NavMain({ items }) {
-    return (
-        <SidebarGroup>
-            <SidebarGroupLabel>Platform</SidebarGroupLabel>
-            <SidebarMenu>
-                {/*{items.map((item) =>*/}
-                {/*    item.items?.length ? (*/}
-                {/*        <Collapsible*/}
-                {/*            key={item.title}*/}
-                {/*            asChild*/}
-                {/*            defaultOpen={item.isActive}*/}
-                {/*            className='group/collapsible'*/}
-                {/*        >*/}
-                {/*            <SidebarMenuItem>*/}
-                {/*                <CollapsibleTrigger asChild>*/}
-                {/*                    <SidebarMenuButton tooltip={item.title}>*/}
-                {/*                        {item.icon && <item.icon />}*/}
-                {/*                        <span>{item.title}</span>*/}
-                {/*                        <ChevronRight className='ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90' />*/}
-                {/*                    </SidebarMenuButton>*/}
-                {/*                </CollapsibleTrigger>*/}
-                {/*                <CollapsibleContent>*/}
-                {/*                    <SidebarMenuSub>*/}
-                {/*                        {item.items.map((subItem) => (*/}
-                {/*                            <SidebarMenuSubItem key={subItem.title}>*/}
-                {/*                                <SidebarMenuSubButton asChild>*/}
-                {/*                                    <Link to={subItem.url}>*/}
-                {/*                                        <span>{subItem.title}</span>*/}
-                {/*                                    </Link>*/}
-                {/*                                </SidebarMenuSubButton>*/}
-                {/*                            </SidebarMenuSubItem>*/}
-                {/*                        ))}*/}
-                {/*                    </SidebarMenuSub>*/}
-                {/*                </CollapsibleContent>*/}
-                {/*            </SidebarMenuItem>*/}
-                {/*        </Collapsible>*/}
-                {/*    ) : (*/}
-                {/*        <SidebarMenuItem key={item.title}>*/}
-                {/*            <SidebarMenuButton asChild tooltip={item.title}>*/}
-                {/*                <Link to={item.url} className='flex items-center gap-2'>*/}
-                {/*                    {item.icon && <item.icon />}*/}
-                {/*                    <span>{item.title}</span>*/}
-                {/*                </Link>*/}
-                {/*            </SidebarMenuButton>*/}
-                {/*        </SidebarMenuItem>*/}
-                {/*    ),*/}
-                {/*)}*/}
-            </SidebarMenu>
-        </SidebarGroup>
-    );
+// Accepts: user, items (array)
+export function NavMain({ user, items = [] }) {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <button className="flex items-center gap-2 px-2 py-1 rounded hover:bg-accent/30 transition-colors">
+          <span className="font-semibold">Menu</span>
+          <ChevronRight className="h-4 w-4" />
+        </button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="min-w-48">
+        {items.map((item) =>
+          item.items?.length ? (
+            <DropdownMenuSub key={item.title}>
+              <DropdownMenuSubTrigger className="flex items-center gap-2">
+                {item.icon && <item.icon />}
+                <span>{item.title}</span>
+              </DropdownMenuSubTrigger>
+              <DropdownMenuSubContent>
+                {item.items.map((subItem) => (
+                  <DropdownMenuItem asChild key={subItem.title}>
+                    <Link to={subItem.url}>
+                      <span>{subItem.title}</span>
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuSubContent>
+            </DropdownMenuSub>
+          ) : (
+            <DropdownMenuItem asChild key={item.title}>
+              <Link to={item.url} className="flex items-center gap-2">
+                {item.icon && <item.icon />}
+                <span>{item.title}</span>
+              </Link>
+            </DropdownMenuItem>
+          ),
+        )}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
 }
