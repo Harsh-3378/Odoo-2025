@@ -5,7 +5,8 @@ import dotenv from "dotenv";
 dotenv.config();
 // 📁 Import Routes
 import authRoutes from './src/routes/authRoutes.js';
-
+import userRoutes from './src/routes/userRoutes.js'
+import productRoutes from './src/routes/productRoutes.js';
 // 🚀 Initialize Express App
 const app = express();
 
@@ -14,7 +15,9 @@ app.use(express.json());
 
 // 🌍 CORS Configuration
 const corsOptions = {
-  origin: ["http://localhost:5173", "http://192.168.1.3:5173"],
+  origin: (origin, callback) => {
+    callback(null, true); // allow all origins
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
@@ -33,6 +36,8 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes); // 🔐 Authentication Routes
+app.use('/api/user', userRoutes); 
+app.use('/api/product', productRoutes); //
 
 app.use((req, res) => {
   res.status(404).json({
