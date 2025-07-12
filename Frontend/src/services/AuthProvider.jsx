@@ -96,10 +96,10 @@ const AuthProvider = ({ children }) => {
   }, [dispatch, location.pathname, navigate]);
 
   // Redirect to profile setup if profile is pending and not already on that page
-  // if (!loading && profilePending && location.pathname !== "/profile-setup") {
-  //   navigate("/profile-setup", { replace: true });
-  //   return null;
-  // }
+  if (!loading && profilePending && location.pathname !== "/profile-setup") {
+    navigate("/profile-setup", { replace: true });
+    return null;
+  }
 
   if (loading) return <FullPageLoader />;
   return children;

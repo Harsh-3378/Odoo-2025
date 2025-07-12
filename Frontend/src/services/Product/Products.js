@@ -26,3 +26,8 @@ export const getProductsByCategory = async (category) => {
   const res = await axiosClient.get(`${API_URLS.product.getByCategory}/${category}`);
   return res.data.products || [];
 };
+
+export const requestPurchase = async (data) => {
+    console.log("Requesting purchase with data:", data);
+  return await axiosClient.post("/purchase/request", data);
+};

@@ -1,7 +1,10 @@
+import BuyNowPopup from "@/components/BuyNowPopup"; // new import
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { getProductById } from "@/services/Product/Products";
+import { selectCurrentUser } from "@/state/authSlice";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 // Dummy seller info for demo
@@ -18,6 +21,8 @@ function ProductDetail() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [mainImgIdx, setMainImgIdx] = useState(0);
+  const currentUser = useSelector(selectCurrentUser);
+  const [showBuyNow, setShowBuyNow] = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -71,7 +76,10 @@ function ProductDetail() {
                 <div className="text-2xl font-bold text-primary">${product.originalPrice}</div>
                 <div className="text-sm text-gray-500">Shipping: $8.92</div>
                 <div className="flex gap-2 mt-2">
-                  <button className="bg-primary text-white px-4 py-2 rounded font-semibold">
+                  <button
+                    className="bg-primary text-white px-4 py-2 rounded font-semibold"
+                    onClick={() => setShowBuyNow(true)}
+                  >
                     Buy now
                   </button>
                   <button className="border px-4 py-2 rounded font-semibold">Make an offer</button>
@@ -155,6 +163,14 @@ function ProductDetail() {
           ))}
         </div>
       </div>
+      {showBuyNow && (
+        <BuyNowPopup
+          open={showBuyNow}
+          onClose={() => setShowBuyNow(false)}
+          product={product}
+          userPoints={currentUser?.points || 0}
+        />
+      )}
     </div>
   );
 }
