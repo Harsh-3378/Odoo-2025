@@ -1,0 +1,59 @@
+# Dependencies
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Build outputs
+/dist
+/build
+/out
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE specific files
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+.vs/
+
+# Testing
+/coverage
+.nyc_output
+
+# Temporary files
+/tmp
+/temp
+
+# Debug files
+.node-xmlhttprequest-sync-*
+
+# MongoDB data directory
+/data/db
+
+# Optional: Uncomment if using TypeScript
+# *.tsbuildinfo
