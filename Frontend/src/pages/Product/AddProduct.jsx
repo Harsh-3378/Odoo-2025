@@ -14,9 +14,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { createProduct } from "@/services/Product/Products";
 import { useState } from "react";
 
-const CATEGORY_OPTIONS = ["Sneakers", "Clothing", "Accessories", "Other"];
+const CATEGORY_OPTIONS = ["Sneakers", "Clothing", "Accessories", "Other", "tops"];
 const BRAND_OPTIONS = ["Nike", "Adidas", "Puma", "Reebok", "Other"];
-const SIZE_OPTIONS = ["34", "36", "38", "40", "42"];
+const SIZE_OPTIONS = ["34", "36", "38", "40", "42", "M"];
+const COLOR_OPTIONS = ["Black", "White", "Red", "Blue", "Green", "Other"];
+const CONDITION_OPTIONS = ["New", "Good", "Fair", "Poor"];
 const STATUS_OPTIONS = [
   { label: "Active", value: "active", color: "bg-green-100 text-green-800" },
   {
@@ -45,6 +47,9 @@ function AddProduct() {
     images: [],
     itemWeight: "",
     status: "active",
+    color: "",
+    condition: "",
+    pointsValue: "",
   });
 
   // Handler for image upload
@@ -109,22 +114,12 @@ function AddProduct() {
       type: form.sellingType,
       size: form.size,
       brand: form.brand,
-      color: "", // Add color field if you have it in your form
-      condition: "", // Add condition field if you have it in your form
+      color: form.color,
+      condition: form.condition,
       originalPrice: Number(form.price) || 0,
-      pointsValue: 0, // Add logic if you have points value
-      images: form.images.slice(0, 3), // Only up to 3 images
-      tags: form.variant, // Assuming variants are tags
-      owner: "", // Set owner if available (e.g., from user context)
-      status: form.status,
-      availability: "", // Add availability if you have it in your form
-      views: 0,
-      likes: [],
-      reports: [],
-      moderationNotes: "",
-      rejectionReason: "",
-      featuredUntil: null,
-      isPromoted: false,
+      pointsValue: Number(form.pointsValue) || 0,
+      images: form.images.slice(0, 3),
+      tags: form.variant,
     };
 
     try {
@@ -156,6 +151,9 @@ function AddProduct() {
       images: [],
       itemWeight: "",
       status: "active",
+      color: "",
+      condition: "",
+      pointsValue: "",
     });
   };
 
@@ -215,6 +213,41 @@ function AddProduct() {
                   </Select>
                 </div>
               </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label>Color</Label>
+                  <Select value={form.color} onValueChange={(v) => handleSelectChange("color", v)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select color" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {COLOR_OPTIONS.map((color) => (
+                        <SelectItem key={color} value={color}>
+                          {color}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label>Condition</Label>
+                  <Select
+                    value={form.condition}
+                    onValueChange={(v) => handleSelectChange("condition", v)}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select condition" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {CONDITION_OPTIONS.map((cond) => (
+                        <SelectItem key={cond} value={cond}>
+                          {cond}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
               <div>
                 <Label>Product Description</Label>
                 <Textarea
@@ -264,6 +297,16 @@ function AddProduct() {
                   name="costPerItem"
                   placeholder="Cost per item"
                   value={form.costPerItem}
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <Label>Points Value</Label>
+                <Input
+                  name="pointsValue"
+                  type="number"
+                  placeholder="Points Value"
+                  value={form.pointsValue}
                   onChange={handleChange}
                 />
               </div>
