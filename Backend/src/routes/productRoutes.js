@@ -2,10 +2,19 @@ import express from 'express';
 import { check } from 'express-validator';
 import { validateRequest } from "../middleware/validator.js";
 import { authenticate } from "../middleware/auth.js";
-import { registerProduct } from '../controllers/productController.js';
+import { registerProduct, getAllProducts, getProductById, getUserProducts, getProductsByCategory } from '../controllers/productController.js';
 
 
 const router = express.Router();
+
+// Get all products
+router.get('/all', getAllProducts);
+// myproducts
+router.get('/myproduct', authenticate, getUserProducts);
+// Get product by id
+router.get('/:id', getProductById);
+// Get products by category (public)
+router.get('/category/:category', getProductsByCategory);
 
 router.post(
   '/add',
