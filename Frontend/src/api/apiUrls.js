@@ -22,6 +22,7 @@ const API_URLS = {
     getById: "/product", // <-- Remove trailing slash, so usage is `/product/:id`
     update: "/product/update",
     delete: "/product/delete",
+    getByCategory: "/product/category", // <-- Add this line
   },
   slot: {
     getAllSlots: "/slots",

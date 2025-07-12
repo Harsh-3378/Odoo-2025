@@ -1,4 +1,5 @@
 import NotFound from "@/pages/NotFound/NotFound.jsx";
+import PublicHome from "@/pages/PublicHome/PublicHome";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
@@ -29,6 +30,7 @@ function App() {
           <Route path="edit/:id" element={<EditProduct />} />
           <Route path=":id" element={<ProductDetail />} /> {/* Product detail route */}
         </Route>
+        <Route path="/home" element={<PublicHome />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
