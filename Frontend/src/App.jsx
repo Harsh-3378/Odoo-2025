@@ -11,6 +11,8 @@ import Product from "./pages/Product/Product";
 import ProductDetail from "./pages/Product/ProductDetail";
 import ProfileSetup from "./pages/Profile/ProfileSetup";
 import SignupPage from "./pages/SigninPage/SignupPage";
+import UserProfile from "./pages/Profile/UserProfile";
+import ManageUsers from "./pages/Admin/ManageUsers";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="signup" element={<SignupPage />} />
           <Route path="dashboard" element={<Home />} />
+          <Route path="profile" element={<UserProfile />} />
+          <Route path="admin" element={<ManageUsers />} />
         </Route>
         <Route path="/product" element={<Layout />}>
           <Route index element={<Product />} />

@@ -6,6 +6,7 @@ const API_URLS = {
     googleAuthApi: "/auth/googleAuth",
     signup: "/auth/register",
     getUser: "/auth/userData",
+    getUserAll: "/user"
   },
   user: {
     getUser: "/user/get_user",

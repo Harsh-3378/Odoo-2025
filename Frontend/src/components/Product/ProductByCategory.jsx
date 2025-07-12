@@ -24,9 +24,7 @@ function ProductByCategory({ category }) {
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.length === 0 && (
-          <div className="col-span-full text-center py-6 text-gray-400">
-            No products found.
-          </div>
+          <div className="col-span-full text-center py-6 text-gray-400">No products found.</div>
         )}
         {products.map((product) => (
           <Link
@@ -37,7 +35,11 @@ function ProductByCategory({ category }) {
             <img
               src={product.images?.[0]?.url || "/placeholder.png"}
               alt={product.images?.[0]?.alt || product.title}
-              className="w-full h-48 object-cover"
+              className="w-full h-48 object-cover bg-gray-100"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "/placeholder.png";
+              }}
             />
             <div className="p-4 flex flex-col gap-2">
               <div className="font-semibold text-lg truncate">{product.title}</div>
