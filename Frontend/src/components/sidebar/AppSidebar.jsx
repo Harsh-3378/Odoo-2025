@@ -7,8 +7,8 @@ import {
   SidebarRail,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { NavMain } from "./navMain.jsx";
 import { data, iconMap } from "@/utils/sidebarItems"; // <-- import sidebar items and iconMap
+import { NavMain } from "./navMain.jsx";
 
 // Remove role-based filtering, just map all items
 const getSidebarItems = (items) =>
@@ -57,7 +57,7 @@ export function AppSidebar({ ...props }) {
           } w-full flex items-center justify-center border-b border-border/70`}
         >
           {state === "collapsed" ? (
-            <img src="/scheduler_logo/Logo.svg" alt="Logo" className="h-7" />
+            <img src="/logo.png" alt="Logo" className="h-7" />
           ) : (
             <>
               <img

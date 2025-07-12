@@ -17,7 +17,7 @@ const API_URLS = {
     changeOrganization: "/user/change-organization",
   },
   product: {
-    create: "/product/create",
+    create: "/product/add",
     getAll: "/product/get_all",
     getById: "/product/get_by_id",
     update: "/product/update",
