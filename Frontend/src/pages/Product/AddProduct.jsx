@@ -13,6 +13,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { createProduct } from "@/services/Product/Products";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CATEGORY_OPTIONS = ["Sneakers", "Clothing", "Accessories", "Other", "tops"];
 const BRAND_OPTIONS = ["Nike", "Adidas", "Puma", "Reebok", "Other"];
@@ -51,6 +52,8 @@ function AddProduct() {
     condition: "",
     pointsValue: "",
   });
+
+  const navigate = useNavigate();
 
   // Handler for image upload
   const handleImagesUploaded = (urls) => {
@@ -124,9 +127,8 @@ function AddProduct() {
 
     try {
       await createProduct(payload);
-      // Optionally reset form or show success message
       handleReset();
-      // Optionally redirect or notify user
+      navigate("/product"); // redirect to product list after success
     } catch (err) {
       // Handle error (show notification, etc.)
       console.error("Product creation failed:", err);

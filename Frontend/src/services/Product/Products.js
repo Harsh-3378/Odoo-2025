@@ -28,6 +28,21 @@ export const getProductsByCategory = async (category) => {
 };
 
 export const requestPurchase = async (data) => {
-    console.log("Requesting purchase with data:", data);
+  console.log("Requesting purchase with data:", data);
   return await axiosClient.post("/purchase/request", data);
+};
+
+export const getPurchaseRequests = async () => {
+  const res = await axiosClient.get("/purchase/requests");
+  return res.data.requests || [];
+};
+
+export const updatePurchaseRequestStatus = async (requestId, status) => {
+  return await axiosClient.patch(`/purchase/request/${requestId}/status`, { status });
+};
+
+// Get all users
+export const getAllUsers = async () => {
+  const res = await axiosClient.get("/user");
+  return res.data.users || [];
 };

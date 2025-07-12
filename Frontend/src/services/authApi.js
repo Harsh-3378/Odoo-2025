@@ -8,6 +8,9 @@ export const postData = async (endpoint, data) => {
 export const getUserData = async () => {
   return await axiosClient.get(API_URLS.auth.getUser);
 };
+export const getUser = async () => {
+  return await axiosClient.get(API_URLS.auth.getUserAll);
+};
 
 export const signupUser = async (data) => {
   return await axiosClient.post(API_URLS.auth.register, data);
