@@ -48,10 +48,24 @@ const getMe = async (req, res) => {
   try {
     const user = await authService.getCurrentUser(req.user.user_id);
 
-    console.log('Current User:', user);
+    // Determine if profile is pending (any required field is missing or empty)
+    const profilePending =
+      !user.first_name ||
+      !user.last_name ||
+      !user.bio ||
+      !user.gender ||
+      !user.avatar ||
+      !user.location ||
+      !user.location.city ||
+      !user.location.state ||
+      !user.location.country;
+
     res.status(200).json({
       success: true,
-      data: user,
+      data: {
+        ...user.toObject(),
+        profilePending,
+      },
     });
   } catch (error) {
     console.error('Error fetching user data:', error);
@@ -61,5 +75,6 @@ const getMe = async (req, res) => {
     });
   }
 };
+
 
 export default {register,login,getMe};
