@@ -18,8 +18,8 @@ const API_URLS = {
   },
   product: {
     create: "/product/add",
-    getAll: "/product/get_all",
-    getById: "/product/get_by_id",
+    getAll: "/product/all",
+    getById: "/product", // <-- Remove trailing slash, so usage is `/product/:id`
     update: "/product/update",
     delete: "/product/delete",
   },

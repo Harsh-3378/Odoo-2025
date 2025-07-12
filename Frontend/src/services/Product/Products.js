@@ -6,7 +6,8 @@ export const createProduct = async (data) => {
 };
 
 export const getAllProducts = async () => {
-  return await axiosClient.get(API_URLS.product.getAll);
+  const res = await axiosClient.get(API_URLS.product.getAll);
+  return res.data.products || [];
 };
 
 export const getProductById = async (id) => {

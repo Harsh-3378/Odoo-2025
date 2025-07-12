@@ -6,9 +6,9 @@ import Layout from "./Layout";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import AddProduct from "./pages/Product/AddProduct";
 import EditProduct from "./pages/Product/EditProduct";
-import SignupPage from "./pages/SigninPage/SignupPage";
-import ProductList from "./pages/Product/ProductList";
 import Product from "./pages/Product/Product";
+import SignupPage from "./pages/SigninPage/SignupPage";
+import ProductDetail from "./pages/Product/ProductDetail";
 
 function App() {
   return (
@@ -24,6 +24,7 @@ function App() {
           <Route index element={<Product />} />
           <Route path="add" element={<AddProduct />} />
           <Route path="edit/:id" element={<EditProduct />} />
+          <Route path=":id" element={<ProductDetail />} /> {/* Product detail route */}
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
