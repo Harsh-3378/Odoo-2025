@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getAllProducts } from "@/services/Product/Products";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 // Replace with your shadcn table import
 // import { Table, TableHead, TableRow, TableCell, TableBody } from "@/components/ui/table";
@@ -13,8 +14,8 @@ function ProductList() {
   const pageSize = 5;
 
   useEffect(() => {
-    getAllProducts().then((res) => {
-      setProducts(res.data?.data || []);
+    getAllProducts().then((products) => {
+      setProducts(products);
     });
   }, []);
 
@@ -48,25 +49,30 @@ function ProductList() {
                 <td className="px-4 py-2">{(page - 1) * pageSize + idx + 1}</td>
                 <td className="px-4 py-2 flex items-center gap-2">
                   <img
-                    src={product.image || "/placeholder.png"}
-                    alt=""
+                    src={product.images?.[0]?.url || "/placeholder.png"}
+                    alt={product.images?.[0]?.alt || ""}
                     className="w-10 h-10 rounded object-cover"
                   />
                   <div>
-                    <div className="font-semibold">{product.name}</div>
+                    <div className="font-semibold">{product.title}</div>
                     <div className="text-xs text-gray-500">{product.description}</div>
+                    <Link
+                      to={`/product/${product.product_id}`}
+                      className="text-blue-600 underline text-xs"
+                    >
+                      View Details
+                    </Link>
                   </div>
                 </td>
-                <td className="px-4 py-2">{product.categories?.join(", ")}</td>
-                <td className="px-4 py-2">${product.price}</td>
-                <td className="px-4 py-2">{product.qty}</td>
+                <td className="px-4 py-2">{product.category}</td>
+                <td className="px-4 py-2">${product.originalPrice}</td>
+                <td className="px-4 py-2">{product.size}</td>
                 <td className="px-4 py-2">{product.brand}</td>
                 <td className="px-4 py-2">
-                  {product.status === "active" ? (
-                    <Badge variant="default">Active</Badge>
-                  ) : (
-                    <Badge variant="secondary">Inactive</Badge>
-                  )}
+                  <Badge variant={product.status === "approved" ? "default" : "secondary"}>
+                    {product.status?.charAt(0).toUpperCase() + product.status?.slice(1) ||
+                      "Pending"}
+                  </Badge>
                 </td>
               </tr>
             ))}
