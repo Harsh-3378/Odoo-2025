@@ -16,6 +16,13 @@ const API_URLS = {
     updateUser: "/user/",
     changeOrganization: "/user/change-organization",
   },
+  product: {
+    create: "/product/create",
+    getAll: "/product/get_all",
+    getById: "/product/get_by_id",
+    update: "/product/update",
+    delete: "/product/delete",
+  },
   slot: {
     getAllSlots: "/slots",
     slotGenerator: "/slots/generate",
