@@ -2,16 +2,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getAllProducts } from "@/services/Product/Products";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
-// Replace with your shadcn table import
-// import { Table, TableHead, TableRow, TableCell, TableBody } from "@/components/ui/table";
+import { Link, useNavigate } from "react-router-dom";
 
 function ProductList() {
   const [products, setProducts] = useState([]);
   // Pagination state (optional)
   const [page, setPage] = useState(1);
   const pageSize = 5;
+  const navigate = useNavigate(); // add this
 
   useEffect(() => {
     getAllProducts().then((products) => {
@@ -26,7 +24,7 @@ function ProductList() {
     <div className="p-6">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">Products list</h2>
-        <Button>+ Add Product</Button>
+        <Button onClick={() => navigate("/product/add")}>+ Add Product</Button>
       </div>
       <div className="rounded-lg border bg-white shadow-sm">
         <table className="min-w-full divide-y divide-gray-200">
